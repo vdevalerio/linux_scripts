@@ -3,8 +3,11 @@
 # Set the folder containing animation videos
 ANIMATIONS_DIR="$HOME/Videos/Wallpapers"
 
+# Set log file
+LOG_FILE="$HOME/.logs/livewallpaper.log"
+
 # Set duration (in seconds) before changing to a new video
-CHANGE_INTERVAL=3600
+CHANGE_INTERVAL=60
 
 # Get XFCE desktop window ID
 get_wid() {
@@ -23,7 +26,7 @@ get_wid() {
     done
 
     if [[ -z "$WID" ]]; then
-        echo "Error: Could not find XFCE desktop window ID after waiting." >> ~/livewallpaper_error.log
+        echo "Error: Could not find XFCE desktop window ID after waiting." >> "$LOG_FILE"
         exit 1
     fi
 }
@@ -40,7 +43,7 @@ pick_random_video() {
 while true; do
     VIDEO=$(pick_random_video)
     if [[ -z "$VIDEO" ]]; then
-        echo "No video found in $ANIMATIONS_DIR" >> ~/livewallpaper_error.log
+        echo "No video found in $ANIMATIONS_DIR" >> "$LOG_FILE"
 	exit 1
     fi
 
