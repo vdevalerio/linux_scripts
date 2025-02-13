@@ -1,7 +1,10 @@
 #!/bin/bash
 
 # Set the folder containing animation videos
-ANIMATIONS_DIR="$HOME/Videos/Wallpapers"
+THEME=$(gsettings get org.gnome.desktop.interface gtk-theme)
+THEME=$(echo "$THEME" | tr -d "'")
+THEME=$(echo "$THEME" | tr ' ' '\ ')
+ANIMATIONS_DIR="$HOME/Videos/Wallpapers/$THEME/"
 
 # Set log file
 LOG_FILE="$HOME/.logs/livewallpaper.log"
