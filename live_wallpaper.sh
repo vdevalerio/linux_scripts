@@ -10,7 +10,7 @@ ANIMATIONS_DIR="$HOME/Videos/Wallpapers/$THEME/"
 LOG_FILE="$HOME/.logs/livewallpaper.log"
 
 # Set duration (in seconds) before changing to a new video
-CHANGE_INTERVAL=60
+CHANGE_INTERVAL=600
 
 # Get XFCE desktop window ID
 get_wid() {
