@@ -40,4 +40,4 @@ get_temperature() {
 temp_c=$(get_temperature)
 
 # Output the temperature with 1 decimal place and °C symbol
-printf "%.1f°C\n" "$temp_c"
+printf "%.0f°C\n" "$temp_c"
