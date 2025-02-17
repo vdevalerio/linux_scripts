@@ -1,16 +1,22 @@
 #!/bin/bash
 
-# Original script by Malte Gerken
-# https://www.maltegerken.de/blog/2020/10/show-the-current-music-credits-in-the-xfce-panel/
-
-# Configurations
+# Default configurations
 scroll_speed=2
 max_length=30
-state_file="/tmp/genmon_scroll_state"
+state_file="/tmp/scroll_state"
+
+# Parse arguments
+while [[ $# -gt 0 ]]; do
+    case "$1" in
+        -s|--speed) scroll_speed="$2"; shift 2 ;;
+        -l|--length) max_length="$2"; shift 2 ;;
+        -f|--file) state_file="$2"; shift 2 ;;
+        *) echo "Unknown option: $1"; exit 1 ;;
+    esac
+done
 
 # Get active player
 player="$(playerctl -l 2>/dev/null | head -n 1)"
-playpausecmd="playerctl play-pause"
 
 # Get metadata
 if [[ "$player" ]]; then
@@ -36,22 +42,17 @@ fi
 
 # Update scroll position
 if (( ${#text} > max_length )); then
-    # Wrap around when reaching the end
     (( pos = (pos + scroll_speed) % ${#text} ))
     echo "$pos" > "$state_file"
 
     # Extract scrolling text
     scroll_text="${text:pos:max_length}"
     if (( ${#scroll_text} < max_length )); then
-        # Wrap the remaining part
         scroll_text+="${text:0:$((max_length - ${#scroll_text}))}"
     fi
 else
     scroll_text="$text"
 fi
 
-# Print output for xfce4-genmon-plugin
-printf "<tool>%s\n%s\n%s</tool>\n" "$title" "$artist" "$album" | sed 's/&/&amp;/g'
-printf "<txt>%s</txt>\n" "$scroll_text" | sed 's/&/&amp;/g'
-echo "<txtclick>$playpausecmd</txtclick>"
-echo "<css>.genmon_value { padding-left: 5px; padding-right: 5px}</css>"
+# Output scrolling text
+echo "$scroll_text"
