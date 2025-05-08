@@ -1,9 +1,9 @@
 #!/bin/bash
 
-if [ "$(id -u)" -ne 0 ]; then
-    echo "This script must be run as root. Try: sudo $0"
-    exit 1
-fi
+# if [ "$(id -u)" -ne 0 ]; then
+#    echo "This script must be run as root. Try: sudo $0"
+#    exit 1
+# fi
 
 CONFIG_FILE="/home/mdlw/.config/scripts/mount_disk.config"
 
@@ -37,7 +37,7 @@ if [ ! -d "$MOUNT_POINT" ]; then
 fi
 
 echo "Mounting $DISK_PATH to $MOUNT_POINT"
-mount "$DISK_PATH" "$MOUNT_POINT" || {
+sudo mount "$DISK_PATH" "$MOUNT_POINT" || {
     echo "Error: Failed to mount $DISK_PATH to $MOUNT_POINT"
     exit 1
 }
