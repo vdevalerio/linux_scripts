@@ -14,7 +14,7 @@ LOG_FILE="$LOG_DIR/livewallpaper.log"
 USE_DIFFERENT_VIDEOS=1
 
 # Set duration (in seconds) before changing to a new video
-CHANGE_INTERVAL=600
+CHANGE_INTERVAL=$((60*60*24))
 
 # Create log directory if it doesn't exist
 mkdir -p "$LOG_DIR"
