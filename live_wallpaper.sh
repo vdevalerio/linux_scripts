@@ -4,6 +4,7 @@
 THEME=$(gsettings get org.gnome.desktop.interface gtk-theme)
 THEME=$(echo "$THEME" | tr -d "'")
 THEME=$(echo "$THEME" | tr ' ' '\ ')
+THEME="Harry Potter"
 ANIMATIONS_DIR="$HOME/Videos/Wallpapers/$THEME/"
 
 # Set log file
